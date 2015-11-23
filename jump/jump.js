@@ -16,8 +16,8 @@ function keyHandle(event) {
 		if (isEnterKey && !isJumpToSlideEmpty) {
 			// horizontal and vertical slides are separated by a dash
 			jumpToSlide = jumpToSlide.split("-");
-			jumpToSlide[0] = isNaN(jumpToSlide[0]) ? 0 : parseInt(jumpToSlide[0]);
-			jumpToSlide[1] = isNaN(jumpToSlide[1]) ? 0 : parseInt(jumpToSlide[1]);
+			jumpToSlide[0] = isNaN(jumpToSlide[0]) ? 0 : parseInt(jumpToSlide[0] - 1);
+			jumpToSlide[1] = isNaN(jumpToSlide[1]) ? 0 : parseInt(jumpToSlide[1] - 1);
 
 			// jump to the specified slide
 			Reveal.slide(jumpToSlide[0], jumpToSlide[1]);
@@ -29,4 +29,3 @@ function keyHandle(event) {
 }
 
 document.onkeypress = keyHandle;
-
