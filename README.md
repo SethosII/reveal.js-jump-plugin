@@ -2,7 +2,30 @@
 
 Plugin for reveal.js that allows to switch between slides by typing the slide number followed by enter.
 
-The slide number configuration was changed in reveal.js version 3.1.0 to be flat by default and to start at one. Therefore this plugin isn't visually compatible with the default configuration (`slideNumber: true`). You need to set the option to something like `slideNumber: 'h - v'` (this was previously the default). Support for the current default will be added in the future.
+The slide number configuration was changed in reveal.js version 3.1.0 and again in 3.2.0. The current version works with 3.2.0 in all possible slide number configurations. For 3.1.0 change
+
+```
+...
+jumpToSlide[0] = isNaN(jumpToSlide[0]) ? 0 : parseInt(jumpToSlide[0]) - 1;
+jumpToSlide[1] = isNaN(jumpToSlide[1]) ? 0 : parseInt(jumpToSlide[1]) - 1;
+
+if ((typeof Reveal.getConfig().slideNumber === "string") ? Reveal.getConfig().slideNumber.contains('c') : false) {
+	jumpToSlide[1] = 0;
+...
+```
+
+to
+
+```
+...
+jumpToSlide[0] = isNaN(jumpToSlide[0]) ? 0 : parseInt(jumpToSlide[0]);
+jumpToSlide[1] = isNaN(jumpToSlide[1]) ? 0 : parseInt(jumpToSlide[1]);
+
+if (Reveal.getConfig().slideNumber === true || (typeof Reveal.getConfig().slideNumber === "string") ? Reveal.getConfig().slideNumber.contains('c') : false) {
+	jumpToSlide[0] = jumpToSlide[0] - 1;
+	jumpToSlide[1] = 0;
+...
+```
 
 ## Setup
 
