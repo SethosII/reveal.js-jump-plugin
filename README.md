@@ -6,11 +6,7 @@ The slide number configuration was changed in reveal.js version 3.1.0 and again 
 
 ```
 ...
-jumpToSlide[0] = isNaN(jumpToSlide[0]) ? 0 : parseInt(jumpToSlide[0]) - 1;
-jumpToSlide[1] = isNaN(jumpToSlide[1]) ? 0 : parseInt(jumpToSlide[1]) - 1;
-
-if ((typeof Reveal.getConfig().slideNumber === "string") ? Reveal.getConfig().slideNumber.contains('c') : false) {
-	jumpToSlide[1] = 0;
+var isFlat = (typeof Reveal.getConfig().slideNumber === "string") ? Reveal.getConfig().slideNumber.contains('c') : false;
 ...
 ```
 
@@ -18,12 +14,7 @@ to
 
 ```
 ...
-jumpToSlide[0] = isNaN(jumpToSlide[0]) ? 0 : parseInt(jumpToSlide[0]);
-jumpToSlide[1] = isNaN(jumpToSlide[1]) ? 0 : parseInt(jumpToSlide[1]);
-
-if (Reveal.getConfig().slideNumber === true || (typeof Reveal.getConfig().slideNumber === "string") ? Reveal.getConfig().slideNumber.contains('c') : false) {
-	jumpToSlide[0] = jumpToSlide[0] - 1;
-	jumpToSlide[1] = 0;
+var isFlat = Reveal.getConfig().slideNumber === true || (typeof Reveal.getConfig().slideNumber === "string") ? Reveal.getConfig().slideNumber.contains('c') : false;
 ...
 ```
 
