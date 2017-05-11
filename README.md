@@ -6,7 +6,7 @@ The slide number configuration was changed in reveal.js version 3.1.0 and again 
 
 ```
 ...
-var isFlat = (typeof Reveal.getConfig().slideNumber === "string") ? Reveal.getConfig().slideNumber.contains('c') : false;
+var isFlat = (typeof Reveal.getConfig().slideNumber === "string") ? Reveal.getConfig().slideNumber.indexOf('c') !== -1 : false;
 ...
 ```
 
@@ -14,7 +14,7 @@ to
 
 ```
 ...
-var isFlat = Reveal.getConfig().slideNumber === true || (typeof Reveal.getConfig().slideNumber === "string") ? Reveal.getConfig().slideNumber.contains('c') : false;
+var isFlat = Reveal.getConfig().slideNumber === true || (typeof Reveal.getConfig().slideNumber === "string") ? Reveal.getConfig().slideNumber.indexOf('c') !== -1 : false;
 ...
 ```
 
