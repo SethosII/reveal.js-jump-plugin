@@ -59,6 +59,9 @@ var keyHandle= function(event) {
 			// jump to the specified slide
 			Reveal.slide(jumpToSlide[0], jumpToSlide[1]);
 
+			// disable event processing, say, if control is active
+			event.preventDefault();
+
 			// reset jumpToSlide variable
 			jumpToSlide = "";
 		}
