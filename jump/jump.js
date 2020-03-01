@@ -34,13 +34,13 @@ var getSlideIndex= function(slideNumber) {
 
 var keyHandle= function(event) {
 	var isSpecialKey = event.shiftKey || event.ctrlKey || event.altKey || event.metaKey;
-	var isNumberKey = event.which >= 48 && event.which <= 57;
-	var isDashKey = event.which === 45;
+	var isNumberKey = event.key >= "0" && event.key <= "9";
+	var isDashKey = event.key === "-";
 
 	if (isNumberKey || isDashKey && !isSpecialKey) {
-		jumpToSlide += String.fromCharCode(event.charCode);
+		jumpToSlide += event.key;
 	} else {
-		var isEnterKey = event.which === 13;
+		var isEnterKey = event.key === "Enter";
 		var isJumpToSlideEmpty = jumpToSlide === "";
 
 		if (isEnterKey && !isJumpToSlideEmpty) {
@@ -68,4 +68,4 @@ var keyHandle= function(event) {
 	}
 };
 
-document.onkeypress = keyHandle;
+document.onkeydown = keyHandle;
