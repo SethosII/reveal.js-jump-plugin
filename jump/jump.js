@@ -1,8 +1,8 @@
 'use strict';
 
-var jumpToSlide= "";
+var jumpToSlide = "";
 
-var getSlideIndex= function(slideNumber) {
+var getSlideIndex = function(slideNumber) {
 	// The number of past slides
 	var pastCount = 0;
 
@@ -32,7 +32,7 @@ var getSlideIndex= function(slideNumber) {
 	return [horizontalIndex, verticalIndex];
 };
 
-var keyHandle= function(event) {
+var keyHandle = function(event) {
 	var isSpecialKey = event.shiftKey || event.ctrlKey || event.altKey || event.metaKey;
 	var isNumberKey = event.key >= "0" && event.key <= "9";
 	var isDashKey = event.key === "-";
