@@ -37,34 +37,33 @@ var keyHandle = function(event) {
 	var isNumberKey = event.key >= "0" && event.key <= "9";
 	var isDashKey = event.key === "-";
 
+	var isEnterKey = event.key === "Enter";
+	var isJumpToSlideEmpty = jumpToSlide === "";
+
 	if (isNumberKey || isDashKey && !isSpecialKey) {
 		jumpToSlide += event.key;
-	} else {
-		var isEnterKey = event.key === "Enter";
-		var isJumpToSlideEmpty = jumpToSlide === "";
+	} else if (isEnterKey && !isJumpToSlideEmpty) {
+		// horizontal and vertical slides are separated by a dash
+		jumpToSlide = jumpToSlide.split("-");
+		jumpToSlide[0] = isNaN(jumpToSlide[0]) ? 0 : parseInt(jumpToSlide[0]) - 1;
+		jumpToSlide[1] = isNaN(jumpToSlide[1]) ? 0 : parseInt(jumpToSlide[1]) - 1;
 
-		if (isEnterKey && !isJumpToSlideEmpty) {
-			// horizontal and vertical slides are separated by a dash
-			jumpToSlide = jumpToSlide.split("-");
-			jumpToSlide[0] = isNaN(jumpToSlide[0]) ? 0 : parseInt(jumpToSlide[0]) - 1;
-			jumpToSlide[1] = isNaN(jumpToSlide[1]) ? 0 : parseInt(jumpToSlide[1]) - 1;
+		var isFlat = (typeof Reveal.getConfig().slideNumber === "string") ? Reveal.getConfig().slideNumber.indexOf('c') !== -1 : false;
+		if (isFlat) {
+			jumpToSlide[1] = 0;
 
-			var isFlat = (typeof Reveal.getConfig().slideNumber === "string") ? Reveal.getConfig().slideNumber.indexOf('c') !== -1 : false;
-			if (isFlat) {
-				jumpToSlide[1] = 0;
-
-				jumpToSlide = getSlideIndex(jumpToSlide[0]);
-			}
-
-			// jump to the specified slide
-			Reveal.slide(jumpToSlide[0], jumpToSlide[1]);
-
-			// disable event processing, say, if control is active
-			event.preventDefault();
-
-			// reset jumpToSlide variable
-			jumpToSlide = "";
+			jumpToSlide = getSlideIndex(jumpToSlide[0]);
 		}
+
+		// jump to the specified slide
+		Reveal.slide(jumpToSlide[0], jumpToSlide[1]);
+
+		// disable event processing, say, if control is active
+		event.preventDefault();
+
+		// reset jumpToSlide variable
+		jumpToSlide = "";
+
 	}
 };
 
