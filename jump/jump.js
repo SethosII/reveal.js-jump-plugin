@@ -40,6 +40,8 @@ var keyHandle = function(event) {
 	var isEnterKey = event.key === "Enter";
 	var isJumpToSlideEmpty = jumpToSlide === "";
 
+	var isShiftKey = event.shiftKey;
+
 	if (isNumberKey || isDashKey && !isSpecialKey) {
 		jumpToSlide += event.key;
 	} else if (isEnterKey && !isJumpToSlideEmpty) {
@@ -64,6 +66,15 @@ var keyHandle = function(event) {
 		// reset jumpToSlide variable
 		jumpToSlide = "";
 
+	} else if (isShiftKey) {
+		var isPageUpKey = event.key === "PageUp";
+		var isPageDownKey = event.key === "PageDown";
+
+		if (isPageUpKey) {
+			Reveal.slide(Reveal.getIndices().h, 0);
+		} else if (isPageDownKey) {
+			Reveal.slide(Reveal.getIndices().h, Number.MAX_SAFE_INTEGER);
+		}
 	}
 };
 
